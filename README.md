@@ -1,10 +1,10 @@
-# ⭐ React-Project: Color Generator ⭐
+# ⭐ React-Project: Cart ⭐
 
 ## 🔗 Links
 
-[Code Link]() <br>
-[Live]() <br>
-[Linkedin]()
+[Code Link](https://github.com/pk170970/React-Project-13-Cart/) <br>
+[Live](https://reactprojectcart.netlify.app/) <br>
+[Linkedin](https://www.linkedin.com/in/pratyush-kesarwani-2b6601171/)
 
 
 ## Learnings
