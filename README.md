@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# ⭐ React-Project: Color Generator ⭐
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🔗 Links
 
-## Available Scripts
+[Code Link]() <br>
+[Live]() <br>
+[Linkedin]()
 
-In the project directory, you can run:
 
-### `npm start`
+## Learnings
 
-Runs the app in the development mode.\
-Open [http://<your_app_url>.ineuron.app:3000](http://<your_app_url>.ineuron.app:3000) to view it in your browser.
+📌1. React Hooks (useState, useEffect, useReducer, useContext) <br>
+📌2. Conditional Rendering <br>
+📌3. Map, filter and reduce <br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Acknowledgement
 
-### `npm run build`
+I am thankful to John Smilga for his amazing udemy course on React.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Steps to create this project
 
-### `npm run eject`
+1. Just rendering the items by creating components and useGlobalContext and pass the data to iterate and render the product. At this time i haven't added any functionality and just created reducer.js file for useReducer. data.js file contains data which is passed on context api/ useGlobalcontext and from there, we are rendering the images and data.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Creating useReducer -
+ firstly write the initial state variable which contain object of all those whose state is changing.
+ we have 
+ const initialState= {
+    loading:false,
+    cart:cartItems(data from ./data.js),
+    total:0,
+    price:0
+ }
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ then we create reducer function and inside that return state.
+ Now the state has some default values and they get passed as props in value of useContext and sended to all the components to display the total price, total products, cart i.e that data ...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ a. Clear Items functionality:
+    1. create a function inside useContext and assign a dispatch message to it.
+    2. pass that function into the value
+    3. creat a functionality on reducer.js file where we return just {...state, cart:[]}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+b. Remove items functionality:
+    1.you need id to remove particular product from cart and function removeItem to dispatch in context.js
+    2. use need to dispact("REMOVE_ITEMS) and write the login on reducer where you have to use filter method
+    3. you also need to pass that funtion removeItem ( from context.js)  to cartItem  component as props to get id.
 
-## Learn More
+c. Increase 
+    1. you need a function increase where you dispatch and id
+    2. that function passed as props to cartItem component where after click this function get executed.
+    3. logic will be written in reducer where first you need to map and check if id is same then return {...state, amount: item.amount +1} like this.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+d. Decrease
+    It is same as increase but we want to add one more functionality as product reaches 0, it gets deleted. so at last use filter and check where item.amount >=1 and return that elements only
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+e. get totals
+    1. For this, you need to use useEffect which re-render when cart changes. inside useEffect, use dispatch
+    2. on reducer.js, you need to use reducer function for calculating total products on cart and total price of products and update it. also fix the total price with toFixed() method upto 2 decimal places.
 
-### Code Splitting
+f. loading and get items
+    1. write a asynchronous function which fetch the data from url. before that line, dispatch({type:"LOADING"});
+    2. then after finding the json response, again use dispatch and pass the obtained response to payload.
+    3. create one more useEffect and call above function only once first time.
+    4. on reducer.js, if(loading) then return rest with loading:true
+    5. also if(get_items) then return rest with cart:action.payload
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You can also create increasing and decreasing in same function
